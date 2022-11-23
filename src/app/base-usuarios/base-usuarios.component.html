@@ -1,0 +1,114 @@
+<!-- Form for including new users -->
+<form [formGroup]="userValidations">
+    <div class="row align-items-end">
+      <div class="col-md-12 col-sm-12">
+        <h1 class="main-title">  <img class="logo-fiscon" src="./../../assets/img/logo.png" alt="Logo Fiscon"> Prova Front - Fiscon </h1>
+      </div>
+      <div class="col-md-12 col-sm-12">
+        <h2> Cadastrar Usuário </h2>
+      </div> 
+      <div class="col-md-4 col-sm-12">
+          <mat-form-field class="form-field" appearance="fill">
+              <mat-label>Nome</mat-label>
+              <input matInput type="text" formControlName="nome">
+              <button *ngIf="userValidations.controls['nome'].value != ''" matSuffix mat-icon-button aria-label="Clear" (click)="userValidations.controls['nome'].setValue('')">
+                <mat-icon>close</mat-icon>
+              </button>
+
+              <mat-error *ngIf="userValidations.get('nome')?.hasError('required')">
+                Preencha o nome.
+              </mat-error>
+              <mat-error *ngIf="userValidations.get('nome')?.hasError('minlength')">
+                O nome deve possuir, no minimo, 4 caracteres.
+              </mat-error>
+          
+              <mat-error *ngIf="userValidations.get('nome')?.hasError('maxlength')">
+                O nome deve possuir, no minimo, 100 caracteres.
+              </mat-error>
+
+              <mat-error *ngIf="userValidations.get('nome')?.hasError('pattern')">
+                Nome inválido.
+              </mat-error>
+            </mat-form-field>
+      </div>
+      <div class="col-md-4 col-sm-12">
+          <mat-form-field class="form-field" appearance="fill">
+              <mat-label>Telefone</mat-label>
+              <input matInput type="text" formControlName="telefone" [mask]="'(00) 00000-0000'">
+              <button *ngIf="userValidations.controls['telefone'].value != ''" matSuffix mat-icon-button aria-label="Clear" (click)="userValidations.controls['telefone'].setValue('')">
+                <mat-icon>close</mat-icon>
+              </button>
+
+              <mat-error *ngIf="userValidations.get('nome')?.hasError('required')">
+                Preencha o telefone.
+              </mat-error>
+
+            </mat-form-field>
+      </div>
+      <div class="col-md-2 col-sm-6">
+          <button mat-stroked-button  color="warn" (click)="cleanUsers()">Limpar</button>
+      </div>
+      <div class="col-md-2 col-sm-6">
+          <button mat-raised-button class="adicionar-usu" color="primary" (click)="addUser()">Adicionar</button>
+      </div>
+    </div>
+</form>
+
+
+<!-- Table -->
+<div class="row row-table">
+  <div class="col-md-12 col-sm-12">
+    <h2 class="usus-cadastrados-text"> Usuários Cadastrados: </h2>
+  </div>
+  <div class="col-md-12 col-sm-12">
+      <mat-form-field appearance="standard">
+          <mat-icon matSuffix>search</mat-icon>
+          <mat-label>Procurar</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Digite" #input>
+        </mat-form-field>
+        
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort>
+        
+            <!-- Cod Column -->
+            <ng-container matColumnDef="cod">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Cód. </th>
+              <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+            </ng-container>
+        
+            <!-- Nome Column -->
+            <ng-container matColumnDef="nome">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+              <td mat-cell *matCellDef="let row"> {{row.nome}} </td>
+            </ng-container>
+        
+            <!-- Telefone Column -->
+            <ng-container matColumnDef="telefone">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefone </th>
+              <td mat-cell *matCellDef="let row"> {{row.telefone | mask: '(00) 00000-0000'}} </td>
+            </ng-container>
+
+            <!-- Acoes Column -->
+            <ng-container matColumnDef="acoes">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Ações </th>
+              <td mat-cell *matCellDef="let row">
+                <button mat-icon-button aria-label="Deletar registro" class="btn-delete" (click)="deleteFieldValue(row)">
+                  <mat-icon>delete</mat-icon>
+                </button>   
+              </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">
+                <span class="no-results-text"> Não foram encontrados resultados. </span>
+                </td>
+            </tr>
+          </table>
+
+        </div>
+  </div>
+</div>

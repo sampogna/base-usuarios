@@ -1,0 +1,88 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import '~ngx-toastr/toastr';
+
+body {
+    background-color: #dee2e4;
+}
+
+.row-table {
+    border-top: 2px solid #afb2b3;
+}
+
+.container {
+    margin: auto;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    margin-top: 5vh;
+    width: 60vw;
+    padding: 20px 30px;
+}
+
+
+.form-field, button {
+    width: 100% !important;
+}
+
+.adicionar-usu {
+    background-color: #4BB543 !important;
+}
+
+@media screen and (min-width: 773px) {
+    button {
+        margin-bottom: 20px !important;
+    }
+    .row-table {
+        margin-top: 20px;
+    }
+
+    .usus-cadastrados-text {
+        margin-top: 25px !important;
+    }
+}
+
+.mat-elevation-z8 {
+    box-shadow: none;
+    border: 1px solid rgba(0,0,0,.12);
+}
+
+table {
+    width: 100%;
+}
+
+td[colspan="4"], .main-title {
+    text-align: center;
+}
+
+.no-results-text {
+    font-style: italic !important;
+    color: #afb2b3;
+}
+
+.main-title {
+    font-weight: 800 !important;
+}
+
+thead {
+    background: #828689 !important;
+}
+
+tbody {
+    background: #dee2e4 !important;
+}
+
+th {
+    color: #FFFFFF !important;
+}
+
+.logo-fiscon {
+    height: 37px;
+}
+
+.btn-delete {
+    text-align: left !important;
+    color: rgb(244, 6, 6);
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
